@@ -10,7 +10,7 @@ const popupContainer = document.querySelector(".popup .content");
 const popupClose = document.querySelector(".popup .action");
 const loader = document.querySelector(".loader");
 
-const MAX_PAGE_IAMGES = 34;
+const MAX_PAGE_IMAGES = 34;
 
 /**
  * Функция задаёт первоначальное состояние страницы.
@@ -157,12 +157,12 @@ const togglePopup = function() {
  */
 const actionHandler = function(evt) {
   evt.preventDefault();
-  const nextPage = evt.currentTarget.dataset.page;
+  const nextPage = Number(evt.currentTarget.dataset.page);
   evt.currentTarget.dataset.page = nextPage + 1;
 
-  if (nextPage > MAX_PAGE_IAMGES) {
+  if (nextPage > MAX_PAGE_IMAGES) {
     console.warn(
-      `WARN: You are trying to call a page that exceeds ${MAX_PAGE_IAMGES}`
+      `WARN: You are trying to call a page that exceeds ${MAX_PAGE_IMAGES}`
     );
     evt.currentTarget.disabled = true;
   } else {
@@ -178,9 +178,11 @@ const actionHandler = function(evt) {
  */
 const imageHandler = function(evt) {
   evt.preventDefault();
+  const imageLink = evt.target.closest("a")
 
-  if (evt.target.closest("a")) {
-    getPictureInfo(evt.target.dataset.id);
+  if (imageLink) {
+
+    getPictureInfo(imageLink.dataset.id);
   }
 };
 
